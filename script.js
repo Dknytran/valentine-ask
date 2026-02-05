@@ -80,11 +80,13 @@ music.addEventListener("ended", () => {
 music.addEventListener("play", () => {
     isPlaying = true;
     playPauseBtn.textContent = "⏸";
+    music.heartInterval = setInterval(spawnHeart, 400);
 });
 
 music.addEventListener("pause", () => {
     isPlaying = false;
     playPauseBtn.textContent = "▶️";
+    clearInterval(music.heartInterval);
 });
 
 volumeSlider.addEventListener("input", () => {
@@ -127,19 +129,47 @@ envelope.addEventListener("click", () => {
 });
 
 // Logic to move the NO btn
+const playerHeight = 80; // Spotify player height
+const padding = 10; // space from edges
 
 noBtn.addEventListener("mouseover", () => {
-    const min = 200;
-    const max = 200;
+    // const min = 200;
+    // const max = 200;
 
-    const distance = Math.random() * (max - min) + min;
-    const angle = Math.random() * Math.PI * 2;
+    // const distance = Math.random() * (max - min) + min;
+    // const angle = Math.random() * Math.PI * 2;
 
-    const moveX = Math.cos(angle) * distance;
-    const moveY = Math.sin(angle) * distance;
+    // const moveX = Math.cos(angle) * distance;
+    // const moveY = Math.sin(angle) * distance;
 
+    // noBtn.style.transition = "transform 0.3s ease";
+    // noBtn.style.transform = `translate(${moveX}px, ${moveY}px)`;
+    const rect = noBtn.getBoundingClientRect();
+
+    // Random distance ±150px horizontally, ±150px vertically
+    let moveX = (Math.random() - 0.5) * 300; 
+    let moveY = (Math.random() - 0.5) * 300;
+
+    // Calculate new absolute position
+    let newX = rect.left + moveX;
+    let newY = rect.top + moveY;
+
+    // Constrain horizontally
+    if (newX < padding) moveX += padding - newX;
+    if (newX + rect.width > window.innerWidth - padding)
+        moveX -= (newX + rect.width) - (window.innerWidth - padding);
+
+    // Constrain vertically (stay above Spotify player)
+    if (newY < padding) moveY += padding - newY;
+    if (newY + rect.height > window.innerHeight - playerHeight - padding)
+        moveY -= (newY + rect.height) - (window.innerHeight - playerHeight - padding);
+
+    // Apply transform
     noBtn.style.transition = "transform 0.3s ease";
     noBtn.style.transform = `translate(${moveX}px, ${moveY}px)`;
+
+    // Ensure NO button is above the player
+    noBtn.style.zIndex = 1000;
 });
 
 // Logic to make YES btn to grow
