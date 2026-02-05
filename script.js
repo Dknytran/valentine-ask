@@ -1,3 +1,5 @@
+// script.js
+
 // Elements
 const envelope = document.getElementById("envelope-container");
 const letter = document.getElementById("letter-container");
@@ -8,13 +10,29 @@ const title = document.getElementById("letter-title");
 const catImg = document.getElementById("letter-cat");
 const buttons = document.getElementById("letter-buttons");
 const finalText = document.getElementById("final-text");
+const music = document.getElementById("bgMusic");
+
 
 // Click Envelope
 
 envelope.addEventListener("click", () => {
     envelope.style.display = "none";
     letter.style.display = "flex";
+    // Start music (GitHub Pages safe)
+    music.volume = 0;
+    music.play();
 
+    // Fade in music
+    let v = 0;
+    const fadeIn = setInterval(() => {
+        if (v < 0.6) {
+            v += 0.05;
+            music.volume = v;
+        } else {
+            clearInterval(fadeIn);
+        }
+    }, 200);
+    
     setTimeout( () => {
         document.querySelector(".letter-window").classList.add("open");
     },50);
