@@ -26,15 +26,10 @@ const songArtistEl = document.getElementById("song-artist");
 // Playlist with metadata
 const playlist = [
     { src: "assets/song1.mp3", title: "nothin on u", artist: "Bazzi" },
-    { src: "assets/song2.mp3", title: "Song Two", artist: "Artist B" },
-    { src: "assets/song3.mp3", title: "Song Three", artist: "Artist C" },
-    { src: "assets/song4.mp3", title: "Song Four", artist: "Artist D" },
-    { src: "assets/song5.mp3", title: "Song Five", artist: "Artist E" },
-    { src: "assets/song6.mp3", title: "Song Six", artist: "Artist F" },
-    { src: "assets/song7.mp3", title: "Song Seven", artist: "Artist G" },
-    { src: "assets/song8.mp3", title: "Song Eight", artist: "Artist H" },
-    { src: "assets/song9.mp3", title: "Song Nine", artist: "Artist I" },
-    { src: "assets/song10.mp3", title: "Song Ten", artist: "Artist J" }
+    { src: "assets/song2.mp3", title: "Sofia", artist: "Clairo" },
+    { src: "assets/song3.mp3", title: "Yellow", artist: "Coldplay" },
+    { src: "assets/song4.mp3", title: "love.", artist: "wave to earth" },
+    { src: "assets/song5.mp3", title: "ONLY", artist: "Lee Hi" }
 ];
 
 let currentSong = 0;
